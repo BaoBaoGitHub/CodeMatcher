@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search-results</title>
+    <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad("java");</script>
+</head>
+<body>
+    <div>
+        <section>
+        
+            <div class="code">
+                {% for foo in results %}
+                <script>
+                  var res = {{foo|tojson}};
+                  var i = 0;
+                  var t = 0;
+                  var ans = "\n";
+                  for ( i = 0; i < res.length ; ++i){
+                      ans += res[i] 
+                      if (res[i] == ";" || res[i] == "}" || res[i] == "{")
+                          ans += "\n";
+                          if (res[i] == "{"){
+                            ++t;
+                            ans += "\t".repeat(t);
+                          }
+                          if (res[i] == ";")
+                            ans += "\t".repeat(t);
+                          if (res[i] =="}"){
+                            --t;
+                            ans += "\t".repeat(t);
+                          }
+                           
+                  }
+
+                </script>
+                    <pre><code>
+                       <script>
+                          document.write(ans);
+                       </script>
+                    </code></pre>
+                {% endfor %} 
+                          
+            </div>
+        </section>
+    </div>
+</body>
+</html>
