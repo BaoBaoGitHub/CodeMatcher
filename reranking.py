@@ -4,6 +4,14 @@ import re
 
 
 def matcher_name(words, line, cmd):
+    """
+    用论文中的方程1计算Sname
+
+    :param words: 查询词列表
+    :param line: 查询结果中的方法
+    :param cmd: es查询用的正则表达式
+    :return:Sname的值
+    """
     cmd = str(cmd).replace('.*', ' ').strip().split(' ')
     line = str(line).replace('\n', '')
 
@@ -14,6 +22,13 @@ def matcher_name(words, line, cmd):
 
 
 def matcher_api(query, line, jdk):
+    """
+
+    :param query:查询词列表
+    :param line: 返回结果中"paesed对应的内容"
+    :param jdk: jdk文件反序列化的对象
+    :return:
+    """
     line = str(line).replace('\n', '').lower()
     index = []
     freq = 0
@@ -72,6 +87,13 @@ def sequence(seq):
 
 
 def reranking(query_parse, data, cmds):
+    """
+
+    :param query_parse: 一个列表，列表中的第一个元素为处理后的查询词列表，第二个元素为单词列表的importance
+    :param data: 模糊查询结果列表
+    :param cmds: 模糊查询结果列表对应的查询正则表达式
+    :return:展示给用户的结果
+    """
     jdk = util.load_pkl('data/jdk_vocab.pkl')
     query = query_parse[0]
 
